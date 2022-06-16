@@ -33,5 +33,19 @@ namespace CinemaKata
 
             return seatingList;
         }
+
+        public List<Seat> AllocateSeats(int numSeats)
+        {
+            List<Seat> newlyAllocatedSeats = new();
+            int startIndex = seatingList.FindIndex(0, seat => seat.Allocated == false);
+
+            for(int i = startIndex; i < (startIndex + numSeats); i++)
+            {
+                newlyAllocatedSeats.Add(seatingList[i]);
+                seatingList[i].Allocated = true;
+            }
+
+            return newlyAllocatedSeats;
+        }
     }
 }

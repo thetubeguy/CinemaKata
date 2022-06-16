@@ -6,20 +6,19 @@ namespace CinemaKata.Test
 {
     public class Tests
     {
+        Tier TestTier;
+        List<Seat> TestSeatingList;
+        
         [SetUp]
         public void Setup()
         {
-
+            TestTier = new(3, 5);
+            TestSeatingList = TestTier.CreateTier();
         }
 
         [Test]
         public void CheckSeatingListIsConstructedInCorrectOrder()
         {
-            Tier TestTier = new(3, 5);
-            List<Seat> TestSeatingList;
-
-
-            TestSeatingList = TestTier.CreateTier();
 
             TestSeatingList[0].Row.Should().Be(1);
             TestSeatingList[0].SeatNum.Should().Be(1);
@@ -39,5 +38,39 @@ namespace CinemaKata.Test
 
             numSeatsRequested.Should().BeInRange(1, 3);
         }
+
+        [Test]
+        public void Allocating_2_Seats_Should_Return_The_First_2_Seats_On_Row_1()
+        {
+            List<Seat> seatsAllocated = TestTier.AllocateSeats(2);
+
+            seatsAllocated.Count.Should().Be(2);    
+
+            seatsAllocated[0].Row.Should().Be(1);
+            seatsAllocated[0].SeatNum.Should().Be(1);
+            seatsAllocated[0].Allocated.Should().Be(true);
+            seatsAllocated[1].Row.Should().Be(1);
+            seatsAllocated[1].SeatNum.Should().Be(2);
+            seatsAllocated[1].Allocated.Should().Be(true);
+        }
+        [Test]
+        public void Allocating_3_Seats_Should_Return_Seats_3_4_5_On_Row_1()
+        {
+            List<Seat> seatsAllocated = TestTier.AllocateSeats(2);
+            seatsAllocated = TestTier.AllocateSeats(3);
+
+            seatsAllocated.Count.Should().Be(3);
+
+            seatsAllocated[0].Row.Should().Be(1);
+            seatsAllocated[0].SeatNum.Should().Be(3);
+            seatsAllocated[0].Allocated.Should().Be(true);
+            seatsAllocated[1].Row.Should().Be(1);
+            seatsAllocated[1].SeatNum.Should().Be(4);
+            seatsAllocated[1].Allocated.Should().Be(true);
+            seatsAllocated[2].Row.Should().Be(1);
+            seatsAllocated[2].SeatNum.Should().Be(5);
+            seatsAllocated[2].Allocated.Should().Be(true);
+        }
+
     }
 }
