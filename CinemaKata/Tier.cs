@@ -9,7 +9,7 @@ namespace CinemaKata
     
     public class Tier
     {
-        List<Seat> SeatingList = new();
+        List<Seat> seatingList = new();
         int NumRows { get; set; }
         int SeatsPerRow { get; set; }
 
@@ -27,11 +27,11 @@ namespace CinemaKata
             {
                 for (int seatNum = 1; seatNum <= SeatsPerRow; seatNum++)
                 {
-                    SeatingList.Add(new Seat(row, seatNum));
+                    seatingList.Add(new Seat(row, seatNum));
                 }
             }
 
-            return SeatingList;
+            return seatingList;
         }
     }
 }

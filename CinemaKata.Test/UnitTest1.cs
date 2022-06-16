@@ -33,9 +33,11 @@ namespace CinemaKata.Test
         }
 
         [Test]
-        public void Test2()
+        public void GetSeatRequest_Should_Return_Random_Number_In_Range_1_To_3()
         {
-           
+            int numSeatsRequested = SeatRequest.GetSeatRequest();
+
+            numSeatsRequested.Should().BeInRange(1, 3);
         }
     }
 }
