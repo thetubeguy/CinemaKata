@@ -12,12 +12,16 @@ namespace CinemaKata
         public int SeatNum { get; set; }
 
         public bool Allocated {get; set; }
+        public char RowID {get; set; }  
 
-        public Seat(int row, int seatnum)
+        public Seat(int row, char rowID, int seatnum)
         {
             Row = row;
+            RowID = rowID;
             SeatNum = seatnum;
             Allocated = false;
         }
+
+ 
     }
 }

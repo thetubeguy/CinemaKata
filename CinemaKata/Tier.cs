@@ -10,6 +10,7 @@ namespace CinemaKata
     public class Tier
     {
         List<Seat> seatingList = new();
+        public List<char> rowIdentifiers = new();
         int NumRows { get; set; }
         int SeatsPerRow { get; set; }
 
@@ -21,13 +22,37 @@ namespace CinemaKata
   
         }
 
+        public void SetRowIdentifier(int lowerCode, int upperCode)
+        {
+   
+            for (int code = lowerCode; code <= upperCode; code++)
+            {
+                rowIdentifiers.Add((char)code);
+            }
+
+                
+        }
+
         public List<Seat> CreateTier()
         {
             for (int row = 1; row <= NumRows; row++)
             {
                 for (int seatNum = 1; seatNum <= SeatsPerRow; seatNum++)
                 {
-                    seatingList.Add(new Seat(row, seatNum));
+                    try 
+                    {
+                        char rowID = rowIdentifiers[row - 1];
+                        seatingList.Add(new Seat(row, rowID, seatNum));
+                    }
+                    catch (Exception ex)
+                    { 
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine("Have you set row identifiers ?");
+                        
+                    }
+    
+
+                    
                 }
             }
 

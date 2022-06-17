@@ -8,12 +8,18 @@ namespace CinemaKata.Test
     {
         Tier TestTier;
         List<Seat> TestSeatingList;
-        
+
         [SetUp]
         public void Setup()
         {
+
+            
             TestTier = new(3, 5);
+            TestTier.SetRowIdentifier(65, 69);
             TestSeatingList = TestTier.CreateTier();
+
+           
+           
         }
 
         [Test]
@@ -42,6 +48,7 @@ namespace CinemaKata.Test
         [Test]
         public void Allocating_2_Seats_Should_Return_The_First_2_Seats_On_Row_1()
         {
+          
             List<Seat> seatsAllocated = TestTier.AllocateSeats(2);
 
             seatsAllocated.Count.Should().Be(2);    
@@ -68,9 +75,13 @@ namespace CinemaKata.Test
             seatsAllocated[1].SeatNum.Should().Be(4);
             seatsAllocated[1].Allocated.Should().Be(true);
             seatsAllocated[2].Row.Should().Be(1);
+            seatsAllocated[2].RowID.Should().Be('A');
             seatsAllocated[2].SeatNum.Should().Be(5);
             seatsAllocated[2].Allocated.Should().Be(true);
         }
 
+    
+     
+ 
     }
 }
