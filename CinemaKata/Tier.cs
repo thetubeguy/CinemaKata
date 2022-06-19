@@ -22,12 +22,12 @@ namespace CinemaKata
   
         }
 
-        public void SetRowIdentifier(int lowerCode, int upperCode)
+        public void SetRowIdentifier(char lowerCode)
         {
    
-            for (int code = lowerCode; code <= upperCode; code++)
+            for (int row = 0; row <= NumRows; row++)
             {
-                rowIdentifiers.Add((char)code);
+                rowIdentifiers.Add((char)((int)lowerCode+row));
             }
 
                 
@@ -64,12 +64,19 @@ namespace CinemaKata
             List<Seat> newlyAllocatedSeats = new();
             int startIndex = seatingList.FindIndex(0, seat => seat.Allocated == false);
 
-            for(int i = startIndex; i < (startIndex + numSeats); i++)
+            if(numSeats > seatingList.Count-startIndex)
             {
-                newlyAllocatedSeats.Add(seatingList[i]);
-                seatingList[i].Allocated = true;
+                Console.WriteLine($"Sorry, only {seatingList.Count - startIndex} seats available");
             }
-
+            else 
+            { 
+                for(int i = startIndex; i < (startIndex + numSeats); i++)
+                {
+     
+                    newlyAllocatedSeats.Add(seatingList[i]);
+                    seatingList[i].Allocated = true;
+                }
+            }
             return newlyAllocatedSeats;
         }
     }

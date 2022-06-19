@@ -15,7 +15,7 @@ namespace CinemaKata.Test
 
             
             TestTier = new(3, 5);
-            TestTier.SetRowIdentifier(65, 69);
+            TestTier.SetRowIdentifier('A');
             TestSeatingList = TestTier.CreateTier();
 
            
@@ -28,12 +28,15 @@ namespace CinemaKata.Test
 
             TestSeatingList[0].Row.Should().Be(1);
             TestSeatingList[0].SeatNum.Should().Be(1);
+            TestSeatingList[0].RowID.Should().Be('A');
             TestSeatingList[0].Allocated.Should().Be(false);
             TestSeatingList[4].Row.Should().Be(1);
             TestSeatingList[4].SeatNum.Should().Be(5);
             TestSeatingList[5].Row.Should().Be(2);
+            TestSeatingList[5].RowID.Should().Be('B');
             TestSeatingList[5].SeatNum.Should().Be(1);
             TestSeatingList[10].Row.Should().Be(3);
+            TestSeatingList[10].RowID.Should().Be('C');
             TestSeatingList[14].SeatNum.Should().Be(5);
         }
 
@@ -80,8 +83,12 @@ namespace CinemaKata.Test
             seatsAllocated[2].Allocated.Should().Be(true);
         }
 
-    
-     
- 
+        [Test]
+        public void Request_More_Seats_Than_There_Are_Available()
+        {
+            List<Seat>? seatsAllocated = TestTier.AllocateSeats(32);
+            seatsAllocated.Count.Should().Be(0);
+            
+        }
     }
 }
