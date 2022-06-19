@@ -11,7 +11,7 @@ namespace CinemaKata
         public static int GetSeatRequest()
         {
             Random random = new ();
-            return random.Next(2) + 1;
+            return random.Next(3)+1;
         }
     }
 }

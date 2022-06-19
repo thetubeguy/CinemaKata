@@ -64,7 +64,10 @@ namespace CinemaKata
             List<Seat> newlyAllocatedSeats = new();
             int startIndex = seatingList.FindIndex(0, seat => seat.Allocated == false);
 
-            if(numSeats > seatingList.Count-startIndex)
+            if (startIndex == -1)
+                Console.WriteLine($"Sorry, there are no more seats available");
+
+            else if (numSeats > seatingList.Count-startIndex)
             {
                 Console.WriteLine($"Sorry, only {seatingList.Count - startIndex} seats available");
             }
