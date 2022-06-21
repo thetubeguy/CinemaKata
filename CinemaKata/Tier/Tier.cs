@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace CinemaKata
 {
     
-    public class Tier
+    public class Tier : ITier
     {
-        List<Seat> seatingList = new();
-        public List<char> rowIdentifiers = new();
+        private List<Seat> seatingList = new();
+        private List<char> rowIdentifiers = new();
         int NumRows { get; set; }
         int SeatsPerRow { get; set; }
 

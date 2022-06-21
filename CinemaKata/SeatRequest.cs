@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CinemaKata
 {
-    public class SeatRequest
+    public class SeatRequest : ISeatRequest
     {
-        public static int GetSeatRequest()
+        public int GetSeatRequest()
         {
             Random random = new ();
             return random.Next(3)+1;

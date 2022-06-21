@@ -8,11 +8,11 @@ namespace CinemaKata
 {
     public class Seat
     {
-        public int Row { get; set; }
-        public int SeatNum { get; set; }
+        public int Row { get; private set; }
+        public int SeatNum { get; private set; }
 
         public bool Allocated {get; set; }
-        public char RowID {get; set; }  
+        public char RowID {get; private set; }  
 
         public Seat(int row, char rowID, int seatnum)
         {

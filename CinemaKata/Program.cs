@@ -1,6 +1,19 @@
 ﻿using CinemaKata;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
+
+
+using IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((_, services) =>
+        services.AddScoped<ISeatRequest, SeatRequest>()
+            .AddScoped<SeatRequestService>()).Build();
+        
+
+using IServiceScope serviceScope = host.Services.CreateScope();
+IServiceProvider provider = serviceScope.ServiceProvider;
+SeatRequestService request = provider.GetRequiredService<SeatRequestService>();
 
 List<Seat>? seatsAllocated;
 
@@ -17,7 +30,7 @@ List<Seat> SeatingList = OneTier.CreateTier();
 int numSeats;
 do
 {
-    numSeats = SeatRequest.GetSeatRequest();
+    numSeats = request.GetSeatRequest();
     Console.WriteLine($"Requesting {numSeats} seats.");
     seatsAllocated = OneTier.AllocateSeats(numSeats);
 
@@ -26,7 +39,10 @@ do
         Console.WriteLine($"Allocated seat: {seat.RowID}{seat.SeatNum}");
     }
 
-} while (seatsAllocated.Count > 0);
+} while (seatsAllocated.Count > 0);  
+
+
+
 
 
 
